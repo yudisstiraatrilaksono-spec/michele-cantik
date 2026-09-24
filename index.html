@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Untuk Kamu ❤️</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+            background: linear-gradient(135deg, #ff758c, #ff7eb3, #ffb6c1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.18);
+            backdrop-filter: blur(10px);
+            padding: 35px 25px;
+            border-radius: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            animation: muncul 1.2s ease;
+        }
+
+        h1 {
+            font-size: 35px;
+            margin-bottom: 10px;
+            animation: detak 1.5s infinite;
+        }
+
+        p {
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        .heart {
+            font-size: 70px;
+            animation: detak 1s infinite;
+            margin: 10px;
+        }
+
+        button {
+            border: none;
+            padding: 15px 25px;
+            margin: 10px;
+            border-radius: 30px;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            min-width: 130px;
+        }
+
+        #yes {
+            background: #ff1744;
+            color: white;
+        }
+
+        #yes:hover {
+            transform: scale(1.15);
+        }
+
+        #no {
+            background: white;
+            color: #ff1744;
+            position: relative;
+        }
+
+        .message {
+            display: none;
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+            animation: muncul 0.8s ease;
+        }
+
+        /* Hati terbang */
+        .floating-heart {
+            position: absolute;
+            bottom: -50px;
+            font-size: 25px;
+            animation: terbang linear forwards;
+            pointer-events: none;
+        }
+
+        @keyframes terbang {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-110vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes detak {
+            0%, 100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.15);
+            }
+        }
+
+        @keyframes muncul {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.8);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @media (max-width: 500px) {
+            h1 {
+                font-size: 28px;
+            }
+
+            p {
+                font-size: 16px;
+            }
+
+            .card {
+                padding: 30px 18px;
+            }
+
+            button {
+                width: 80%;
+                margin: 7px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="card">
+
+            <div class="heart">❤️</div>
+
+            <h1>Hai Sayang 🥰</h1>
+
+            <p>
+                Aku punya satu pertanyaan buat kamu...
+            </p>
+
+            <h2>
+                Kamu mau terus sama aku? 💕
+            </h2>
+
+            <button id="yes">
+                MAU ❤️
+            </button>
+
+            <button id="no">
+                TIDAK 😭
+            </button>
+
+            <div class="message" id="message">
+                YEEEYYY ❤️🥹<br><br>
+                Makasih sudah memilih aku!<br>
+                Aku sayang kamu selamanya 💕
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        const yes = document.getElementById("yes");
+        const no = document.getElementById("no");
+        const message = document.getElementById("message");
+
+        // Tombol MAU
+        yes.addEventListener("click", function () {
+
+            message.style.display = "block";
+
+            // Buat banyak hati
+            for (let i = 0; i < 30; i++) {
+                setTimeout(() => {
+                    buatHati();
+                }, i * 100);
+            }
+
+        });
+
+
+        // Tombol TIDAK kabur
+        function kabur() {
+
+            const maxX = window.innerWidth - no.offsetWidth - 20;
+            const maxY = window.innerHeight - no.offsetHeight - 20;
+
+            const x = Math.random() * maxX;
+            const y = Math.random() * maxY;
+
+            no.style.position = "fixed";
+            no.style.left = x + "px";
+            no.style.top = y + "px";
+        }
+
+
+        no.addEventListener("mouseover", kabur);
+
+        // Supaya di HP juga bisa kabur ketika disentuh
+        no.addEventListener("touchstart", function(e) {
+            e.preventDefault();
+            kabur();
+        });
+
+
+        // Membuat hati terbang
+        function buatHati() {
+
+            const heart = document.createElement("div");
+
+            heart.classList.add("floating-heart");
+
+            const hearts = ["❤️", "💕", "💖", "💗", "💓", "💘"];
+
+            heart.innerHTML =
+                hearts[Math.floor(Math.random() * hearts.length)];
+
+            heart.style.left =
+                Math.random() * 100 + "vw";
+
+            heart.style.animationDuration =
+                (3 + Math.random() * 4) + "s";
+
+            heart.style.fontSize =
+                (20 + Math.random() * 30) + "px";
+
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 7000);
+        }
+
+
+        // Hati muncul terus
+        setInterval(buatHati, 700);
+
+    </script>
+
+</body>
+</html>
